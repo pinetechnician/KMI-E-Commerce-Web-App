@@ -19,6 +19,7 @@ import OrdersPage from '../pages/OrdersPage/OrdersPage';
 import OrderDetails from '../pages/OrderDetails/OrderDetails';
 import PrivateRoute from '../components/PrivateRoute/PrivateRoute';
 import { useNavigate } from 'react-router-dom'; 
+import styles from './App.module.css';
 
 const AppRoutes = () => {
   const dispatch = useDispatch();

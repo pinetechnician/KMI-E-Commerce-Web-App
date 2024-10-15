@@ -14,7 +14,7 @@ const NavBar = ({ isLoggedIn, onLogout, cartItemCount }) => {
   return (
     <nav className={styles.navbar}>
       <div className={styles.navbarLogo}>
-        <Link to="/">E-Commerce</Link> {/* Brand or Home link */}
+        <Link to="/">KMI</Link> {/* Brand or Home link */}
       </div>
       
       <div className={styles.hamburger} onClick={handleToggle} aria-label="toggle-navigation">
