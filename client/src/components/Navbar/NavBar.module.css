@@ -33,7 +33,7 @@
   height: 30px;
   position: absolute;
   right: 20px;
-  top: 14px;
+  top: 23px;
 }
 
 /* Links in the nav */
@@ -88,11 +88,6 @@
   .navbar {
     flex-direction: column;
     align-items: flex-start;
-    min-height: 47px;
-  }
-
-  .navbarLogo a {
-    top: 10px;
   }
 
   .hamburger {

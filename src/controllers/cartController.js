@@ -89,6 +89,7 @@ const getCart = async (req, res) => {
             itemId: row.item_id,
             productId: row.product_id,
             productName: row.product_name,
+            itemNumber: row.item_number,
             productDescription: row.product_description,
             unitPrice: row.unit_price,
             productPrice: row.product_price,

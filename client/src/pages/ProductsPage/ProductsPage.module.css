@@ -15,7 +15,7 @@
 
 /* Search input */
 .searchContainer input {
-  width: 60%; /* Shrink the width for mobile */
+  width: 70%; /* Shrink the width for mobile */
   padding: 10px 40px 10px 15px;
   margin-bottom: 10px; /* Space below the input */
   border-radius: 5px;
