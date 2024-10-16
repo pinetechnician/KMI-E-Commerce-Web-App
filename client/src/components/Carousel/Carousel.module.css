@@ -1,0 +1,55 @@
+/* Carousel.module.css */
+.carouselContainer {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.carouselInner {
+    display: flex;
+    width: 100%; /* Adjust the width to control the size */
+    height: auto;
+    transition: transform 0.5s ease-in-out;
+}
+  
+.carouselItem {
+    display: flex;
+    flex: 0 0 33.33%; /* Each item takes up the full width */
+    box-sizing: border-box;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    transition: opacity 0.5s ease;
+}
+  
+.carouselItem.active {
+    display: flex;
+}
+  
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 10;
+    color: #072E13;
+}
+  
+.arrow:hover {
+    color: #555;
+}
+  
+.arrow:first-child {
+    left: 10px;
+}
+  
+.arrow:last-child {
+    right: 10px;
+}

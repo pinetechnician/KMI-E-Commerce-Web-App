@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchProductById, searchProducts } from '../../redux/products/productsSlice';
 import { addToCart } from '../../redux/currentCart/currentCart';
 import ProductCard from '../../components/ProductCard/ProductCard';
+import Carousel from '../../components/Carousel/Carousel';
 import styles from './ProductDetails.module.css'; // Assuming you will add some styles
 
 const ProductDetails = () => {
@@ -99,10 +100,18 @@ const ProductDetails = () => {
                         />
                     )}
                     <button onClick={handleAddToCart}>Add to Cart</button>
+                    
                     <h2>Related Products</h2>
-                    {products.map((pr) => (
-                        <ProductCard product={pr} />
-                    ))}
+                    {products.length > 3 ? (
+                        <Carousel products={products} />
+                    ) : (
+                        <div className={styles.productsGrid} >
+                            {products.map((pr) => (
+                                <ProductCard product={pr} />
+                            ))}
+                        </div>
+                    )}
+                    
                 </>
             ) : (
                 <p>Product not found.</p>
