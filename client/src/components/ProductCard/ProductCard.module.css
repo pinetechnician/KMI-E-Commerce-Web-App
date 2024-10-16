@@ -1,0 +1,10 @@
+.productCard {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+    
+.productCard img {
+    width: 100%;
+    height: auto;
+}

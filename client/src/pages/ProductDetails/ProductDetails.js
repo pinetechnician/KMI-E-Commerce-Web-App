@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchProductById } from '../../redux/products/productsSlice';
+import { fetchProductById, searchProducts } from '../../redux/products/productsSlice';
 import { addToCart } from '../../redux/currentCart/currentCart';
+import ProductCard from '../../components/ProductCard/ProductCard';
 import styles from './ProductDetails.module.css'; // Assuming you will add some styles
 
 const ProductDetails = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
-    const { product, loading, error } = useSelector((state) => state.products);
+    const { product, products, loading, error } = useSelector((state) => state.products);
     const [quantity, setQuantity] = useState();
+    //console.log('product: ', product);
+    const itmNum = product ? product[0].item_number.slice(0, 4) : null;
+    //console.log('search Number: ', itmNum);
 
-    console.log('product: ', product);
+    
 
     useEffect(() => {
         if (id) {
@@ -24,6 +28,13 @@ const ProductDetails = () => {
             setQuantity(product[0].qty1);  // Set the initial quantity to qty1
         }
     }, [product]);
+    
+    useEffect(() => {
+        if(itmNum) {
+            dispatch(searchProducts(itmNum));
+            console.log('searched products: ', products);
+        }
+    }, [itmNum]);
 
     const handleBlur = () => {
         if (product && product[0] && quantity < product[0].qty1) {
@@ -34,7 +45,7 @@ const ProductDetails = () => {
     const handleAddToCart = () => {
         const finalQuantity = Math.max(quantity, product[0].qty1);
         dispatch(addToCart({ productId: product[0].id, quantity: finalQuantity }));
-      };
+    };
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;
@@ -88,6 +99,10 @@ const ProductDetails = () => {
                         />
                     )}
                     <button onClick={handleAddToCart}>Add to Cart</button>
+                    <h2>Related Products</h2>
+                    {products.map((pr) => (
+                        <ProductCard product={pr} />
+                    ))}
                 </>
             ) : (
                 <p>Product not found.</p>
