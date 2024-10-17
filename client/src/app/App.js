@@ -6,12 +6,14 @@ import { checkSession } from '../redux/auth/authSlice';
 import { fetchCart } from '../redux/currentCart/currentCart';
 import { logoutFromServer } from '../api/api';
 import { logout } from '../redux/auth/authSlice';
+import HomePage from '../pages/HomePage/HomePage';
 import RegisterPage from '../pages/RegisterPage/RegisterPage';
 import NavBar from '../components/Navbar/NavBar';
 import Login from '../pages/LoginPage/LoginPage';
 import Profile from '../pages/ProfilePage/ProfilePage';
 import ProductsPage from '../pages/ProductsPage/ProductsPage';
 import ProductDetails from '../pages/ProductDetails/ProductDetails';
+import CategoryPage from '../pages/CategoryPage/CategoryPage';
 import Cart from '../pages/CartPage/CartPage';
 import CheckoutPage from '../pages/CheckoutPage/CheckoutPage';
 import OrderConfirmation from '../pages/OrderConfirmation/OrderConfirmation';
@@ -55,11 +57,13 @@ const AppRoutes = () => {
         cartItemCount={cartItemCount}
       />
       <Routes>
+        <Route path ="/" element={<HomePage/>} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/products/:id" element={<ProductDetails />} />
+        <Route path="/category/:categoryName" element={<CategoryPage />} />
         <Route path="/cart" element={<Cart isLoggedIn={isLoggedIn} />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/order-confirmation" element={<OrderConfirmation />} />
