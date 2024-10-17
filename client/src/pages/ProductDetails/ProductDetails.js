@@ -56,8 +56,7 @@ const ProductDetails = () => {
             {product ? (
                 <>
                     <h1>{product[0].description}</h1>
-                    <img src={product[0].image} alt={product.name} />
-                    <p>{product[0].description}</p>
+                    <img src="https://www.floralkmi.com/products/x067w.jpg" alt={product.name} />
                     <p>Item Number: {product[0].item_number}</p>
                     {product[0].availability ? <p>Availability: Sold Out</p> : <p>Availability: In stock</p>}
                     <table className={styles.pricingTable}>

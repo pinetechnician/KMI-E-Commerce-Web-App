@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ProductCard from "../ProductCard/ProductCard";
+import { Link } from "react-router-dom";
 import styles from './Carousel.module.css';
 
 const Carousel = ({ products }) => {
@@ -37,9 +37,13 @@ const Carousel = ({ products }) => {
                     key={index}
                     className={styles.carouselItem}
                     >
-                    <img src='https://www.floralkmi.com/categories/4367B_PI_CR_52d71ff12577a1.jpg' alt={product.description} />
-                    <h3>{product.description}</h3>
-                    <h4>{product.item_number}</h4>
+                        <Link to={`/products/${product.id}`} >
+                            <div className={styles.itemBox} >
+                                <img src='https://www.floralkmi.com/categories/4367B_PI_CR_52d71ff12577a1.jpg' alt={product.description} />
+                                <h3>{product.description}</h3>
+                                <h4>{product.item_number}</h4>
+                            </div>
+                        </Link>
                   </div>
                 ))}
             </div>

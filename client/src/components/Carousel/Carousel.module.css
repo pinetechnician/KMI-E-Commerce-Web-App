@@ -2,10 +2,12 @@
 .carouselContainer {
     position: relative;
     overflow: hidden;
-    width: 100%;
+    width: 80%;
+    align-self: center;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 40px;
 }
   
 .carouselInner {
@@ -17,20 +19,31 @@
   
 .carouselItem {
     display: flex;
-    flex: 0 0 33.33%; /* Each item takes up the full width */
+    flex: 0 0 50%; /* Each item takes up the full width */
     box-sizing: border-box;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 1px solid #ccc;
+    
     padding: 10px;
     text-align: center;
     transition: opacity 0.5s ease;
 }
-  
-.carouselItem.active {
-    display: flex;
+
+.itemBox {
+    border: 1px solid #ccc;
+    padding: 25px;
+    height: 450px;
+    width: 450px;
 }
+
+.itemBox img {
+    max-width: 250px;
+}
+  
+/*.carouselItem.active {
+    display: flex;
+}*/
   
 .arrow {
     position: absolute;
@@ -52,4 +65,11 @@
   
 .arrow:last-child {
     right: 10px;
+}
+
+@media (max-width: 1817px) {
+
+    .carouselItem {
+        flex: 0 0 50%;
+    }
 }
