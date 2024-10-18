@@ -12,6 +12,7 @@
   z-index: 100;
   flex-wrap: wrap; /* Ensure it wraps when content grows */
   min-height: 64px;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.3);
 }
 
 /* Logo styling */

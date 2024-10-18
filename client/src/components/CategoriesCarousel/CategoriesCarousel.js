@@ -28,6 +28,8 @@ const CategoriesCarousel = () => {
     const translateX = -currentIndex * 100; // Move the wrapper by 100% of the container width for each slide
 
     return (
+        <div className={styles.wrapper}>
+            <h1>Featured Categories</h1>
         <div className={styles.carouselContainer} >
             <div className={styles.arrow} onClick={goToPrevious} >
                 &#8592;
@@ -52,6 +54,7 @@ const CategoriesCarousel = () => {
             <div className={styles.arrow} onClick={goToNext}>
                 &#8594;
             </div>
+        </div>
         </div>
     );
 };

@@ -51,6 +51,7 @@ const ProductsPage = () => {
 
     return (
         <div className={styles.productsPage}>
+            <div className={styles.searchWrapper} >
         <h1>Our Products</h1>
 
          {/* Search Input */}
@@ -75,7 +76,7 @@ const ProductsPage = () => {
             </option>
             ))}
         </select>
-
+        </div>
         <div className={styles.productsGrid}>
             {products.map((product) => (
             <div key={product.id} className={styles.productCard}>

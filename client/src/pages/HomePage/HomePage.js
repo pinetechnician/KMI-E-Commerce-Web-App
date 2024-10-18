@@ -9,9 +9,12 @@ const HomePage = () => {
 
     return (
         <div className={styles.homePage} >
-            <BannerCarousel />
-            <h1>Featured Categories</h1>
-            <CategoriesCarousel />
+            <div className={styles.bannerWrapper} >
+                <BannerCarousel />
+            </div>
+            <div className={styles.mainWrapper} >
+                <CategoriesCarousel />
+            </div>
         </div>
     );
 };
