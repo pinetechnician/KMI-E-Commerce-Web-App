@@ -9,6 +9,7 @@ import { logout } from '../redux/auth/authSlice';
 import HomePage from '../pages/HomePage/HomePage';
 import RegisterPage from '../pages/RegisterPage/RegisterPage';
 import NavBar from '../components/Navbar/NavBar';
+import SearchResults from '../pages/SearchResults/SearchResults';
 import Login from '../pages/LoginPage/LoginPage';
 import Profile from '../pages/ProfilePage/ProfilePage';
 import ProductsPage from '../pages/ProductsPage/ProductsPage';
@@ -64,6 +65,7 @@ const AppRoutes = () => {
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/products/:id" element={<ProductDetails />} />
         <Route path="/category/:categoryName" element={<CategoryPage />} />
+        <Route path="/search/:searchQuery" element={<SearchResults />} />
         <Route path="/cart" element={<Cart isLoggedIn={isLoggedIn} />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/order-confirmation" element={<OrderConfirmation />} />

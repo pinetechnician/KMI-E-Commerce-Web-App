@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import SearchBar from '../SearchBar/SearchBar';
 import styles from './NavBar.module.css'; // Optional: Style for the NavBar
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
@@ -15,6 +16,10 @@ const NavBar = ({ isLoggedIn, onLogout, cartItemCount }) => {
     <nav className={styles.navbar}>
       <div className={styles.navbarLogo}>
         <Link to="/">KMI</Link> {/* Brand or Home link */}
+      </div>
+
+      <div className={styles.navSearch} >
+        <SearchBar />
       </div>
       
       <div className={styles.hamburger} onClick={handleToggle} aria-label="toggle-navigation">
