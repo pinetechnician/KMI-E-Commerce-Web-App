@@ -78,16 +78,26 @@ const ProductsPage = () => {
         </select>
         </div>
         <div className={styles.productsGrid}>
-            {products.map((product) => (
-            <div key={product.id} className={styles.productCard}>
+        {products.map((product) => {
+            // Find the main image or fall back to the first available image
+            const mainImage = product.images.find(img => img.image_type === 'main') || 
+                                product.images.find(img => img.image_type === 'closeup') ||
+                                product.images[0]; // Fallback to the first image if none match
+
+            return (
+                <div key={product.id} className={styles.productCard}>
                 <Link to={`/products/${product.id}`}>
-                    <img src='https://www.floralkmi.com/sections/2478aor-re-bk-br.jpg' alt={product.name} />
+                    <img 
+                    src={mainImage ? mainImage.image_url : 'https://www.floralkmi.com/sections/2478aor-re-bk-br.jpg'} 
+                    alt={product.name} 
+                    />
                     <h2>{product.description}</h2>
                 </Link>
                 <p>{product.item_number}</p>
                 <p>${product.price1}</p>
-            </div>
-            ))}
+                </div>
+            );
+        })}
         </div>
         </div>
     );

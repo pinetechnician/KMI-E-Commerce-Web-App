@@ -3,17 +3,42 @@ const pool = require('../config/database'); // assuming you have a db.js file th
 // Get all products, optionally filter by category
 const getProducts = (req, res) => {
   const categoryId = req.query.category;
-  let query = 'SELECT products.* FROM products';
+  let query = `
+    SELECT 
+      products.*, 
+      COALESCE(
+        json_agg(
+          json_build_object(
+            'image_url', product_images.image_url,
+            'image_type', product_images.image_type
+          )
+        ) FILTER (WHERE product_images.image_url IS NOT NULL), 
+        '[]'
+      ) AS images
+    FROM products
+    LEFT JOIN product_images ON products.item_number = product_images.item_number
+  `;
+
   const params = [];
 
+  // Add category filtering if provided
   if (categoryId) {
-    query += ' JOIN product_categories AS pc ON products.id = pc.product_id JOIN categories AS ct ON pc.category_id = ct.id WHERE ct.id = $1';
+    query += `
+      JOIN product_categories AS pc ON products.id = pc.product_id 
+      JOIN categories AS ct ON pc.category_id = ct.id 
+      WHERE ct.id = $1
+    `;
     params.push(categoryId);
   }
 
+  // Add GROUP BY to aggregate the images for each product
+  query += `
+    GROUP BY products.id
+  `;
+
   pool.query(query, params, (error, results) => {
     if (error) {
-      throw error;
+      return res.status(500).json({ error: error.message });
     }
     res.status(200).json(results.rows);
   });
