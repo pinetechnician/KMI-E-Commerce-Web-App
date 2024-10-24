@@ -43,13 +43,15 @@ const Carousel = ({ products }) => {
                         >
                             <Link to={`/products/${product.id}`} >
                                 <div className={styles.itemBox} >
-                                    <img src={
+                                    <div className={styles.imageWrapper} >
+                                        <img src={
                                         mainImage ? 
                                         mainImage.image_url : 
                                         'https://user-images.githubusercontent.com/5671907/174857173-c3351777-14f1-4e12-bcb4-f46693f9dbe0.png'
                                         } 
                                         alt={product.description} 
-                                    />
+                                        />
+                                    </div>
                                     <h3>{product.description}</h3>
                                     <h4>{product.item_number}</h4>
                                 </div>

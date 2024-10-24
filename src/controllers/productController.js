@@ -76,11 +76,29 @@ const getProductById = (req, res) => {
 
 const searchProducts = async (req, res) => {
   const searchQuery = req.query.searchQuery || '';
+
+  let query = `
+    SELECT 
+      products.*, 
+      COALESCE(
+        json_agg(
+          json_build_object(
+            'image_url', product_images.image_url,
+            'image_type', product_images.image_type
+          )
+        ) FILTER (WHERE product_images.image_url IS NOT NULL), 
+        '[]'
+      ) AS images
+    FROM products
+    LEFT JOIN product_images ON products.item_number = product_images.item_number
+    WHERE products.description ILIKE $1 OR products.item_number ILIKE $1
+    GROUP BY products.id
+  `;
   
   try {
       // Perform SQL query to search by description or item number
       const result = await pool.query(
-        `SELECT * FROM products WHERE description ILIKE $1 OR item_number ILIKE $1`, 
+        query, 
         [`%${searchQuery}%`]
       );
 

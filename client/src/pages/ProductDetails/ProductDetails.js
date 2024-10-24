@@ -118,20 +118,25 @@ const ProductDetails = () => {
                     )}
                     <button onClick={handleAddToCart}>Add to Cart</button>
                     
+                    <div className={styles.relatedProducts} >
                     <h2>Related Products</h2>
+                    <div className={styles.relatedProductsWrapper} >
                     {products.length > 3 ? (
                         <Carousel products={products} />
                     ) : (
                         <div className={styles.productsGrid} >
                             {products.map((pr) => {
                                 const mainPic = pr?.images?.find(img => img.image_type === 'closeup') || 
-                                pr?.images?.find(img => img.image_type === 'main') ||
-                                (pr?.images ? product.images[0] : null); 
-                                (<ProductCard product={pr} mainImage={mainPic} />)
+                                                pr?.images?.find(img => img.image_type === 'main') ||
+                                                (pr?.images ? pr.images[0] : null); 
+                                return (
+                                    <ProductCard product={pr} mainImage={mainPic} />
+                                );
                             })}
                         </div>
                     )}
-                    
+                    </div>
+                    </div>
                 </>
             ) : (
                 <p>Product not found.</p>

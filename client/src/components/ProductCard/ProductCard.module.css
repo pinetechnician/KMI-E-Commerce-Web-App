@@ -4,7 +4,17 @@
     text-align: center;
 }
     
-.productCard img {
+/*.productCard img {
     width: 100%;
     height: auto;
+}*/
+
+.imageWrapper {
+    height: 250px;
+}
+    
+.imageWrapper img {
+    width: auto;
+    height: auto;
+    max-height: 250px;
 }

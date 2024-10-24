@@ -37,8 +37,14 @@
     width: 450px;
 }
 
-.itemBox img {
-    max-width: 250px;
+.imageWrapper {
+    height: 250px;
+}
+    
+.imageWrapper img {
+    width: auto;
+    height: auto;
+    max-height: 250px;
 }
   
 .arrow {

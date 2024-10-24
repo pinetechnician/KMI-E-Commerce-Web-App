@@ -11,14 +11,16 @@ const ProductCard = ({product, mainImage}) => {
         <>
                 <div key={product.id} className={styles.productCard}>
                     <Link to={`/products/${product.id}`}>
-                    <img 
-                    src={
-                        mainImage ? 
-                        mainImage.image_url : 
-                        'https://user-images.githubusercontent.com/5671907/174857173-c3351777-14f1-4e12-bcb4-f46693f9dbe0.png'
-                        } 
-                    alt={product.description} 
-                    />
+                        <div className={styles.imageWrapper} >
+                            <img 
+                            src={
+                            mainImage ? 
+                            mainImage.image_url : 
+                            'https://user-images.githubusercontent.com/5671907/174857173-c3351777-14f1-4e12-bcb4-f46693f9dbe0.png'
+                            } 
+                            alt={product.description} 
+                            />
+                        </div>
                         <h2>{product.description}</h2>
                     </Link>
                     <p>{product.itemNumber}</p>
