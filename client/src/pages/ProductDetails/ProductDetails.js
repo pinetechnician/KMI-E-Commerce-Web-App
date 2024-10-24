@@ -15,14 +15,26 @@ const ProductDetails = () => {
     //console.log('product: ', product);
     const itmNum = product ? product[0].item_number.slice(0, 4) : null;
     //console.log('search Number: ', itmNum);
-
-    
+    const [mainImage, setMainImage] = useState(null);
 
     useEffect(() => {
         if (id) {
             dispatch(fetchProductById(id));
         }
     }, [dispatch, id]);
+
+    useEffect(() => {
+        if (product && product[0]) {
+            // Find the main image once product data is fetched
+            const foundMainImage = product[0].images.find(img => img.image_type === 'main') ||
+                                   product[0].images.find(img => img.image_type === 'closeup') ||
+                                   product[0].images[0]; // Fallback
+
+            setMainImage(foundMainImage);
+            setQuantity(product[0].qty1);  // Set initial quantity to qty1
+        }
+    }, [product]);
+
 
     useEffect(() => {
         if (product && product[0]) {
@@ -56,7 +68,13 @@ const ProductDetails = () => {
             {product ? (
                 <>
                     <h1>{product[0].description}</h1>
-                    <img src="https://www.floralkmi.com/products/x067w.jpg" alt={product.name} />
+                    <img src={
+                        mainImage ? 
+                        mainImage.image_url : 
+                        'https://user-images.githubusercontent.com/5671907/174857173-c3351777-14f1-4e12-bcb4-f46693f9dbe0.png'
+                        } 
+                        alt={product.item_number} 
+                    />
                     <p>Item Number: {product[0].item_number}</p>
                     {product[0].availability ? <p>Availability: Sold Out</p> : <p>Availability: In stock</p>}
                     <table className={styles.pricingTable}>
@@ -105,9 +123,12 @@ const ProductDetails = () => {
                         <Carousel products={products} />
                     ) : (
                         <div className={styles.productsGrid} >
-                            {products.map((pr) => (
-                                <ProductCard product={pr} />
-                            ))}
+                            {products.map((pr) => {
+                                const mainPic = pr?.images?.find(img => img.image_type === 'closeup') || 
+                                pr?.images?.find(img => img.image_type === 'main') ||
+                                (pr?.images ? product.images[0] : null); 
+                                (<ProductCard product={pr} mainImage={mainPic} />)
+                            })}
                         </div>
                     )}
                     

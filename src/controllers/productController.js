@@ -48,7 +48,25 @@ const getProducts = (req, res) => {
 const getProductById = (req, res) => {
   const productId = parseInt(req.params.productId);
 
-  pool.query('SELECT * FROM products WHERE id = $1', [productId], (error, results) => {
+  let query = `
+    SELECT 
+      products.*, 
+      COALESCE(
+        json_agg(
+          json_build_object(
+            'image_url', product_images.image_url,
+            'image_type', product_images.image_type
+          )
+        ) FILTER (WHERE product_images.image_url IS NOT NULL), 
+        '[]'
+      ) AS images
+    FROM products
+    LEFT JOIN product_images ON products.item_number = product_images.item_number
+    WHERE products.id = $1
+    GROUP BY products.id
+  `;
+
+  pool.query(query, [productId], (error, results) => {
     if (error) {
       throw error;
     }

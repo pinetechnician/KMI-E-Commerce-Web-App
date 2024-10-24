@@ -32,20 +32,31 @@ const Carousel = ({ products }) => {
             </div>
 
             <div className={styles.carouselInner} style={{ transform: `translateX(${translateX}%)` }}>
-                {products.map((product, index) => (
-                    <div
-                    key={index}
-                    className={styles.carouselItem}
-                    >
-                        <Link to={`/products/${product.id}`} >
-                            <div className={styles.itemBox} >
-                                <img src='https://www.floralkmi.com/categories/4367B_PI_CR_52d71ff12577a1.jpg' alt={product.description} />
-                                <h3>{product.description}</h3>
-                                <h4>{product.item_number}</h4>
-                            </div>
-                        </Link>
-                  </div>
-                ))}
+                {products.map((product, index) => {
+                    const mainImage = product?.images?.find(img => img.image_type === 'closeup') || 
+                                    product?.images?.find(img => img.image_type === 'main') ||
+                                    (product?.images ? product.images[0] : null); 
+                    return (
+                        <div
+                        key={index}
+                        className={styles.carouselItem}
+                        >
+                            <Link to={`/products/${product.id}`} >
+                                <div className={styles.itemBox} >
+                                    <img src={
+                                        mainImage ? 
+                                        mainImage.image_url : 
+                                        'https://user-images.githubusercontent.com/5671907/174857173-c3351777-14f1-4e12-bcb4-f46693f9dbe0.png'
+                                        } 
+                                        alt={product.description} 
+                                    />
+                                    <h3>{product.description}</h3>
+                                    <h4>{product.item_number}</h4>
+                                </div>
+                            </Link>
+                        </div>
+                    )
+                })}
             </div>
 
             <div className={styles.arrow} onClick={goToNext}>

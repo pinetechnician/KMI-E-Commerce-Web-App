@@ -80,17 +80,20 @@ const ProductsPage = () => {
         <div className={styles.productsGrid}>
         {products.map((product) => {
             // Find the main image or fall back to the first available image
-            const mainImage = product.images.find(img => img.image_type === 'closeup') || 
-                                product.images.find(img => img.image_type === 'main') ||
-                                product.images[0]; // Fallback to the first image if none match
+            //const mainImage = product.images.find(img => img.image_type === 'closeup') || 
+                              //  product.images.find(img => img.image_type === 'main') ||
+                               // product.images[0]; // Fallback to the first image if none match
 
+            const mainImage = product?.images?.find(img => img.image_type === 'closeup') || 
+                               product?.images?.find(img => img.image_type === 'main') ||
+                               (product?.images ? product.images[0] : null);                
             return (
                 <div key={product.id} className={styles.productCard}>
                 <Link to={`/products/${product.id}`}>
                     <div className={styles.imageWrapper}>
                         <img 
                             src={mainImage ? mainImage.image_url : 'https://user-images.githubusercontent.com/5671907/174857173-c3351777-14f1-4e12-bcb4-f46693f9dbe0.png'} 
-                            alt={product.name} 
+                            alt={product.item_number} 
                         />
                     </div>
                     <h2>{product.description}</h2>
