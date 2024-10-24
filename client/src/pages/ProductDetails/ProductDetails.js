@@ -64,9 +64,10 @@ const ProductDetails = () => {
     if (error) return <p>Error: {error}</p>;
 
     return (
-        <div className={styles.productDetails}>
+        <div className={styles.productDetailsWrapper} >
             {product ? (
                 <>
+                    <div className={styles.productDetails}>
                     <h1>{product[0].description}</h1>
                     <img src={
                         mainImage ? 
@@ -117,6 +118,7 @@ const ProductDetails = () => {
                         />
                     )}
                     <button onClick={handleAddToCart}>Add to Cart</button>
+                    </div>
                     
                     <div className={styles.relatedProducts} >
                     <h2>Related Products</h2>
