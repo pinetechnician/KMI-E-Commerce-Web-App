@@ -49,16 +49,31 @@ const SearchResults = () => {
         </select>
         </div>
         <div className={styles.productsGrid}>
-            {products.map((product) => (
-            <div key={product.id} className={styles.productCard}>
+        {products.map((product) => {
+            // Find the main image or fall back to the first available image
+            //const mainImage = product.images.find(img => img.image_type === 'closeup') || 
+                              //  product.images.find(img => img.image_type === 'main') ||
+                               // product.images[0]; // Fallback to the first image if none match
+
+            const mainImage = product?.images?.find(img => img.image_type === 'closeup') || 
+                               product?.images?.find(img => img.image_type === 'main') ||
+                               (product?.images ? product.images[0] : null);                
+            return (
+                <div key={product.id} className={styles.productCard}>
                 <Link to={`/products/${product.id}`}>
-                    <img src='https://www.floralkmi.com/sections/2478aor-re-bk-br.jpg' alt={product.name} />
+                    <div className={styles.imageWrapper}>
+                        <img 
+                            src={mainImage ? mainImage.image_url : 'https://user-images.githubusercontent.com/5671907/174857173-c3351777-14f1-4e12-bcb4-f46693f9dbe0.png'} 
+                            alt={product.item_number} 
+                        />
+                    </div>
                     <h2>{product.description}</h2>
                 </Link>
                 <p>{product.item_number}</p>
                 <p>${product.price1}</p>
-            </div>
-            ))}
+                </div>
+            );
+        })}
         </div>
         </div>
     );

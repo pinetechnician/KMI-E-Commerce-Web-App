@@ -13,7 +13,7 @@
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px;
     background-color: white;
-    padding: 20px;
+    padding: 20px 200px 20px 200px;
   }
     
   .productCard {
@@ -24,9 +24,14 @@
     box-shadow: 3px 0px 10px rgba(0, 0, 0, 0.2);
   }
     
-  .productCard img {
+  .imageWrapper {
+    height: 250px;
+  }
+    
+  .imageWrapper img {
     width: 100%;
     height: auto;
+    max-height: 250px;
   }
     
   select {
